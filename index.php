@@ -1,12 +1,16 @@
 <?php
 include 'conexion.php';
+include 'procesar.php';
 $nameDB = 'huerta_db';
 $connect = connectDB($nameDB);
 if ($connect->connect_error)
     die("Error: " . $connect->connect_error);
 $query = "Select id, nombre, tipo, dias_cosecha from cultivos;";
-$result = $connect->query($query);
 
+$orderBy = $_POST['order-by'];
+$queryOrder = 'select * from cultivos order by dias_cosecha '.$orderBy.';';
+
+$result = $connect->query($queryOrder);
 ?>
 
 
@@ -51,6 +55,7 @@ $result = $connect->query($query);
                         <option value="asc">Asc</option>
                     </select>
                     <button type="submit">Ordenar</button>
+                    
                 </div>
             </div>
             <?php if ($result && $result->num_rows > 0): ?>
@@ -60,6 +65,7 @@ $result = $connect->query($query);
                         <th>Nombre</th>
                         <th>Tipo</th>
                         <th>Dias Cosecha</th>
+                        <th>Ciclo Cultivo</th>
                     </tr>
                     <?php while ($r = $result->fetch_assoc()) : ?>
                         <tr>
@@ -67,6 +73,7 @@ $result = $connect->query($query);
                             <td><?= $r['nombre'] ?></td>
                             <td><?= $r['tipo'] ?></td>
                             <td><?= $r['dias_cosecha'] ?></td>
+                            <td><?= cicloCultivo($r['dias_cosecha']) ?></td>
                         </tr>
                     <?php endwhile; ?>
                 </table>

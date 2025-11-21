@@ -1,13 +1,3 @@
-<?php
-include 'conexion.php';
-$nameDB = 'huerta_db';
-$connect = connectDB($nameDB);
-if ($connect->connect_error)
-    die("Error: " . $connect->connect_error);
-$query = "Select id, nombre, tipo, dias_cosecha from cultivos;";
-$result = $connect->query($query);
-
-?>
 
 
 <!DOCTYPE html>
@@ -78,3 +68,19 @@ $result = $connect->query($query);
 </body>
 
 </html>
+<?php
+include 'conexion.php';
+$nameDB = 'huerta_db';
+$connect = connectDB($nameDB);
+if ($connect->connect_error)
+    die("Error: " . $connect->connect_error);
+$nombre = $_POST['nombre'];
+$tipo = $_POST['tipo'];
+$dias_cosecha = $_POST['dias'];
+
+$query = "INSERT INTO cultivos (nombre, tipo, dias_cosecha) VALUES ('$nombre', '$tipo', $dias_cosecha)";
+
+
+$result = $connect->query($query);
+
+?>
