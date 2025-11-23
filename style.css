@@ -12,9 +12,9 @@
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    height: 100vh;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -89,7 +89,7 @@ a {
 }
 
 table,
-form {
+.formulario {
     width: 500px;
     background-color: blanchedalmond;
     border-collapse: collapse;
@@ -99,7 +99,7 @@ form {
         8px 8px 2px grey;
 }
 
-form {
+.formulario {
     padding: 20px;
     display: flex;
     flex-direction: column;
