@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -35,7 +33,7 @@
             <div class="encabezado-tabla">
                 <h3>Añadir</h3>
             </div>
-            <form action="post">
+            <form class="formulario" method="post" action="procesar.php">
                 <div>
                     <span>Nombre:</span>
                     <input type="text" name="nombre" id="nomnbre-furta" placeholder="Nombre fruta">
@@ -68,19 +66,4 @@
 </body>
 
 </html>
-<?php
-include 'conexion.php';
-$nameDB = 'huerta_db';
-$connect = connectDB($nameDB);
-if ($connect->connect_error)
-    die("Error: " . $connect->connect_error);
-$nombre = $_POST['nombre'];
-$tipo = $_POST['tipo'];
-$dias_cosecha = $_POST['dias'];
 
-$query = "INSERT INTO cultivos (nombre, tipo, dias_cosecha) VALUES ('$nombre', '$tipo', $dias_cosecha)";
-
-
-$result = $connect->query($query);
-
-?>

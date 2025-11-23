@@ -1,14 +1,14 @@
 <?php
 include 'conexion.php';
-include 'procesar.php';
+include 'funciones.php';
 $nameDB = 'huerta_db';
 $connect = connectDB($nameDB);
 if ($connect->connect_error)
     die("Error: " . $connect->connect_error);
 $query = "Select id, nombre, tipo, dias_cosecha from cultivos;";
 
-$orderBy = $_POST['order-by'];
-$queryOrder = 'select * from cultivos order by dias_cosecha '.$orderBy.';';
+$orderBy = $_GET['order-by'] ?? 'asc';
+$queryOrder = 'select * from cultivos order by dias_cosecha ' . $orderBy . ';';
 
 $result = $connect->query($queryOrder);
 ?>
@@ -48,15 +48,15 @@ $result = $connect->query($queryOrder);
         <div>
             <div class="encabezado-tabla">
                 <h3>Resultados</h3>
-                <div class="ordenar">
+                <form class="ordenar" method="get" action="index.php">
                     <span>Dias de cosecha: </span>
                     <select name="order-by">
-                        <option value="desc">Desc</option>
                         <option value="asc">Asc</option>
+                        <option value="desc">Desc</option>
                     </select>
                     <button type="submit">Ordenar</button>
-                    
-                </div>
+
+                </form>
             </div>
             <?php if ($result && $result->num_rows > 0): ?>
                 <table>
