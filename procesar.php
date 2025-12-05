@@ -1,6 +1,6 @@
 <?php
-include 'conexion.php';
-include 'funciones.php';
+include './config/conexion.php';
+include './funtions/funciones.php';
 
 // PARA INSERTRAR DATOS 
 
@@ -13,12 +13,7 @@ if ($connect->connect_error)
 $nombre = trim(filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS));
 $tipo = trim(filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_SPECIAL_CHARS));
 $dias_cosecha = filter_input(INPUT_POST, 'dias', FILTER_VALIDATE_INT);
-echo($nombre);
-echo('<br>');
-echo($tipo);
-echo('<br>');
 
-echo($dias_cosecha);
 
 if (!$nombre || !$tipo || !$dias_cosecha) {
     die("Faltan datos en el formulario.");
@@ -27,8 +22,7 @@ if (!$nombre || !$tipo || !$dias_cosecha) {
 $query = "INSERT INTO cultivos (nombre, tipo, dias_cosecha)
           VALUES ('$nombre', '$tipo', $dias_cosecha)";
 
-$result = $connect->query($query);
-
+$result = mysqli_prepare($connect, $query);
 if ($result) {
     header("Location: index.php");
     exit;

@@ -1,16 +1,21 @@
 <?php
-include 'conexion.php';
-include 'funciones.php';
+$pass = ('DB_PASS');
+echo($pass);
+include './config/conexion.php';
+include './functions/funciones.php';
 $nameDB = 'huerta_db';
 $connect = connectDB($nameDB);
 if ($connect->connect_error)
     die("Error: " . $connect->connect_error);
 $query = "Select id, nombre, tipo, dias_cosecha from cultivos;";
 
+
 $orderBy = $_GET['order-by'] ?? 'asc';
 $queryOrder = 'select * from cultivos order by dias_cosecha ' . $orderBy . ';';
 
 $result = $connect->query($queryOrder);
+$totalRows = $result->fetch_row();
+
 ?>
 
 
@@ -51,8 +56,8 @@ $result = $connect->query($queryOrder);
                 <form class="ordenar" method="get" action="index.php">
                     <span>Dias de cosecha: </span>
                     <select name="order-by">
-                        <option value="asc">Asc</option>
-                        <option value="desc">Desc</option>
+                        <option value="asc" <?= ($orderBy === 'asc') ? 'selected' : '' ?>>Asc</option>
+                        <option value="desc" <?= ($orderBy === 'desc') ? 'selected' : '' ?>>Desc</option>
                     </select>
                     <button type="submit">Ordenar</button>
 

@@ -53,8 +53,9 @@
                     <input type="number" name="dias" id="dias-cosecha" placeholder="0" min="1" max="999">
                 </div>
                 <div>
-                    <input type="submit">
+                    <input type="submit" value="Confirmar">
                     <input type="reset" value="Limpiar">
+                    
                 </div>
             </form>
         </div>
